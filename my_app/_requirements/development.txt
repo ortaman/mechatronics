@@ -1,10 +1,14 @@
 -r base.txt
 
+coverage
+django-autocomplete-light
+django-cors-headers
 django-debug-toolbar
 django-extensions
-django-autocomplete-light
+drf-yasg
+httpie
 ipython
 
-# django-cors-headers
-# coverage
-# flake8
+# To graph models
+pyparsing
+pydot

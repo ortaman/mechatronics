@@ -1,8 +1,4 @@
-
 django
-djangorestframework
 psycopg2
+psycopg2-binary
 Pillow
-
-# PyJWT
-# django-crontab
