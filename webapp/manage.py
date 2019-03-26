@@ -12,6 +12,9 @@ if __name__ == '__main__':
     elif DJANGO_ENV == 'development':
         DJANGO_SETTINGS_MODULE = '_mechatronics.settings.development'
 
+    elif DJANGO_ENV == 'staging':
+        DJANGO_SETTINGS_MODULE = '_mechatronics.settings.staging'
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', DJANGO_SETTINGS_MODULE)
 
     try:
