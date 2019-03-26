@@ -7,10 +7,10 @@ if __name__ == '__main__':
     DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
     if DJANGO_ENV == 'production':
-        DJANGO_SETTINGS_MODULE = '_my_app.settings.production'
+        DJANGO_SETTINGS_MODULE = '_mechatronics.settings.production'
 
     elif DJANGO_ENV == 'development':
-        DJANGO_SETTINGS_MODULE = '_my_app.settings.development'
+        DJANGO_SETTINGS_MODULE = '_mechatronics.settings.development'
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', DJANGO_SETTINGS_MODULE)
 

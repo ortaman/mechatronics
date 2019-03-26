@@ -1,1 +1,0 @@
-Folder to collect statics files from the django admin and the django app.

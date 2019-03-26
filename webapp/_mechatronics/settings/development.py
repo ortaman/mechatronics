@@ -1,6 +1,6 @@
 
 from .base import *
-from _my_app.keys.development import *
+from _mechatronics.keys.development import *
 
 
 # Quick-start development settings - unsuitable for production
