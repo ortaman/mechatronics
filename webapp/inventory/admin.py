@@ -1,0 +1,64 @@
+
+from django.contrib import admin
+from .models import Service, Device, Payment
+
+
+class ServiceAdmin(admin.ModelAdmin):
+
+    list_display = ('service', 'cost',)
+    list_filter = ('created_at',)
+
+    fieldsets = (
+        ('Información personal',
+            {'fields': ('service', 'cost',)}),
+    )
+
+    readonly_fields = ('created_at', 'updated_at')
+
+    search_fields = ('service',)
+    ordering = ('created_at',)
+    filter_horizontal = ()
+
+
+class DeviceAdmin(admin.ModelAdmin):
+
+    # date_hierarchy = ('income_date')
+    # raw_id_fields = ('customer',)
+    list_display = ('folio', 'customer', 'kind', 'status', 'income_date', 'delivery_date', 'assigned_to')
+    list_filter = ('income_date', 'delivery_date',)
+
+    fieldsets = (
+        ('Información del equipo',
+            {'fields': ('folio', 'kind', 'make', 'model', 'status', 'income_date',
+                        'delivery_date', 'services', 'total', 'customer')}),
+        ('Información adicional',
+            {'fields': ('added_by', 'created_at', 'updated_at',)}),
+    )
+
+    readonly_fields = ('folio', 'created_at', 'updated_at')
+
+    search_fields = ('service',)
+    ordering = ('delivery_date',)
+    filter_horizontal = ('services',)
+
+
+class PaymentAdmin(admin.ModelAdmin):
+
+    list_display = ('service', 'amount', 'payment_date')
+    list_filter = ('payment_date',)
+
+    fieldsets = (
+        ('Información del pago',
+            {'fields': ('service', 'amount', 'payment_date')}),
+    )
+
+    readonly_fields = ('created_at', 'updated_at')
+
+    search_fields = ('service',)
+    ordering = ('payment_date',)
+    filter_horizontal = ()
+
+
+admin.site.register(Service, ServiceAdmin)
+admin.site.register(Device, DeviceAdmin)
+admin.site.register(Payment, PaymentAdmin)
