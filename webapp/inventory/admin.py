@@ -1,5 +1,7 @@
 
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+
 from .models import Service, Device, Payment
 
 
@@ -9,7 +11,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ('created_at',)
 
     fieldsets = (
-        ('Información personal',
+        ('Service Information',
             {'fields': ('service', 'cost',)}),
     )
 
@@ -20,6 +22,11 @@ class ServiceAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 
+class ServicesInline(admin.TabularInline):
+    model = Device.services.through
+    extra = 1
+
+
 class DeviceAdmin(admin.ModelAdmin):
 
     # date_hierarchy = ('income_date')
@@ -28,10 +35,10 @@ class DeviceAdmin(admin.ModelAdmin):
     list_filter = ('income_date', 'delivery_date',)
 
     fieldsets = (
-        ('Información del equipo',
+        (_('Device Information'),
             {'fields': ('folio', 'kind', 'make', 'model', 'status', 'income_date',
                         'delivery_date', 'services', 'total', 'customer')}),
-        ('Información adicional',
+        ('Additional Information',
             {'fields': ('added_by', 'created_at', 'updated_at',)}),
     )
 
@@ -39,7 +46,11 @@ class DeviceAdmin(admin.ModelAdmin):
 
     search_fields = ('service',)
     ordering = ('delivery_date',)
-    filter_horizontal = ('services',)
+    # filter_horizontal = ('services',)
+
+    inlines = [
+        ServicesInline,
+    ]
 
 
 class PaymentAdmin(admin.ModelAdmin):
@@ -48,7 +59,7 @@ class PaymentAdmin(admin.ModelAdmin):
     list_filter = ('payment_date',)
 
     fieldsets = (
-        ('Información del pago',
+        ('Payment information',
             {'fields': ('service', 'amount', 'payment_date')}),
     )
 

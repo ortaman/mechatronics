@@ -17,6 +17,8 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Date of the last update'))
 
     class Meta:
+        verbose_name = _('Customer')
+        verbose_name_plural = _('Customers')
         unique_together = ('names', 'surnames', )
 
     def __str__(self):
@@ -40,7 +42,9 @@ class Employee(models.Model):
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Date of the last update'))
 
     class Meta:
+        verbose_name = _('Employee')
+        verbose_name_plural = _('Employees')
         unique_together = ('names', 'surnames',)
 
     def __str__(self):
-        return '%s %s' % (self.nombre, self.apellido, )
+        return '%s %s' % (self.names, self.surnames, )

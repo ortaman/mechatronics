@@ -15,6 +15,10 @@ class Service(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name=_('Date of creation'))
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Date of the last update'))
 
+    class Meta:
+        verbose_name = _('Service')
+        verbose_name_plural = _('Services')
+
     def __str__(self):
         return self.service
 
@@ -48,7 +52,11 @@ class Device(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name=_('Date of creation'))
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Date of the last update'))
 
-    def __unicode__(self):
+    class Meta:
+        verbose_name = _('Device')
+        verbose_name_plural = _('Devices')
+
+    def __str__(self):
         return '%s %s' % (self.kind, self.make)
 
 
@@ -60,5 +68,9 @@ class Payment(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name=_('Date of creation'))
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Date of the last update'))
 
-    def __unicode__(self):
+    class Meta:
+        verbose_name = _('Payment')
+        verbose_name_plural = _('Payments')
+
+    def __str__(self):
         return self.service
