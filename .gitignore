@@ -28,3 +28,4 @@ db.sqlite3
 ### Third apps ###
 .coverage
 htmlcov/
+d
