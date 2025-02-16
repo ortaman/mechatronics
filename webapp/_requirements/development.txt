@@ -1,0 +1,14 @@
+-r base.txt
+
+coverage
+django-autocomplete-light
+django-cors-headers
+django-debug-toolbar
+django-extensions
+drf-yasg
+httpie
+ipython
+
+# To graph models
+pyparsing
+pydot
