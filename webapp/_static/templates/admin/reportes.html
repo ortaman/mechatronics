@@ -1,0 +1,45 @@
+{# templates/admin/custom_page.html #}
+
+{% extends 'admin/change_list.html' %}
+
+{% block pagination %}{% endblock %}
+{% block filters %}{% endblock filters %}
+{% block object-tools %}{% endblock object-tools %}
+{% block search %}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}"> Home </a>
+  {% if page_name %} &rsaquo; {{ page_name }}{% endif %}
+</div>
+{% endblock %}
+
+{% block result_list %}
+
+<h1> Generación de Reportes <h1>
+
+
+{{data}}
+
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+    <div class="submit-row">
+            <input type="submit" value="Generar PDF" name="_generate-pdf">
+    </div>
+{% endblock %}
+
+{% endblock result_list %}
+
+
+
+{% load static %}
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'landing/vendor/jquery/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'landing/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'landing/js/scripts.js' %}"></script>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+<link rel="stylesheet" href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}">

@@ -41,7 +41,7 @@ class Device(models.Model):
     investment = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_('Pago de refacciones'))
     
     final_cost = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_('Costo final'))
-    paid = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_('Adelanto'))
+    paid = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_('Pagos'))
     to_collect = models.FloatField(default=0.0, blank=True, null=True, verbose_name=_('Por cobrar'))
 
     ultimatum_notification = models.BooleanField(default=False, verbose_name=_('Ultimatum Notificado'))
@@ -76,64 +76,19 @@ class Service(models.Model):
         verbose_name_plural = _('Servicios')
 
     def __str__(self):
-        return self.name
-    
-
-class Payment(models.Model):
-
-    amount = models.FloatField(verbose_name=_('Cantidad del pago'))
-    payment_date = models.DateField(default=datetime.now, verbose_name=_('Fecha de pago'))
-
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, null=True, verbose_name=_('Pago a empleado'))
-    service = models.ForeignKey(Service, on_delete=models.PROTECT, null=True, verbose_name=_('Pago a servicio'))
-
-    created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name=_('Fecha de creación'))
-    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Fecha de la última actualización'))
+        return  f'{self.name}'
 
 
-class PaymentPayroll(Payment):
-    class Meta:
-        proxy = True
+class Product(models.Model):
 
-        verbose_name = _('Pagos de Nómina')
-        verbose_name_plural = _('Pagos de Nómina')
+    name = models.CharField(max_length=40, verbose_name=_('Nombre del producto'))
+    cost = models.FloatField(verbose_name=_('Costo del producto'))
 
-
-    def __str__(self):
-        return f''
-
-
-class PaymentService(Payment):
-    class Meta:
-        proxy = True
-
-        verbose_name = _('Pagos de servicio')
-        verbose_name_plural = _('Pagos de servicios')
-
-    def __str__(self):
-        return f''
-
-
-class PaymentDevice(models.Model):
-    PAYMENT_TYPE = [
-        ("adelanto_de_pago", "Adelanto de pago"),
-        ("rest_del_pago", "Resto del pago"),
-    ]
-
-    payment_type = models.CharField(max_length=16, choices=PAYMENT_TYPE, verbose_name=_('Tipo de Pago'))
-
-    amount = models.FloatField(verbose_name=_('Cantidad del pago'))
-    payment_date = models.DateField(default=datetime.now, verbose_name=_('Fecha de pago'))
-
-    device = models.ForeignKey(Device, on_delete=models.PROTECT, verbose_name=_('Dispositivo'))
-    added_by = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name=_('Pago recibido por'))
+    stock = models.IntegerField(verbose_name=_('Existencias'))
+    sold = models.IntegerField(default=0, verbose_name=_('Vendidos'))
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name=_('Fecha de creación'))
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name=_('Fecha de la última actualización'))
 
-    class Meta:
-        verbose_name = _('Pago del cliente')
-        verbose_name_plural = _('Pagos de clientes')
-
     def __str__(self):
-        return f'{self.payment_type} - {self.amount} - {self.payment_date}'
+        return f'{self.name}'

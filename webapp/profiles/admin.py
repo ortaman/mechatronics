@@ -50,6 +50,9 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ('surnames', 'names', 'phone', 'email')
     list_filter = ('created_at',)
 
+    search_fields = ('email', 'surnames', 'names')
+    ordering = ('surnames', 'email')
+
     fieldsets = (
         ('Personal information',
             {'fields': ('names', 'surnames', 'phone', 'email', 'rfc', 'address')}),
@@ -59,18 +62,23 @@ class CustomerAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created_at', 'updated_at')
 
-    search_fields = ('email', 'surnames',)
-    ordering = ('surnames', 'email')
-
     inlines = [
         DeviceCustomerInline,
     ]
-    
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 class EmployeeAdmin(UserAdmin):
 
     list_display = ('username', 'surnames', 'names', 'phone', 'email', 'base_salary', 'is_staff', 'is_active')
     list_filter = ('is_superuser', 'is_staff', 'is_active',)
+
+    search_fields = ('email', 'surnames', 'names')
+    ordering = ('surnames', 'email')
+
+    filter_horizontal = ('groups',)
 
     fieldsets = (
         ('Autenticación',
@@ -86,10 +94,6 @@ class EmployeeAdmin(UserAdmin):
     )
 
     readonly_fields = ('is_superuser', 'created_at', 'updated_at', 'last_login')
-
-    search_fields = ('email', 'surnames',)
-    ordering = ('surnames', 'email')
-    filter_horizontal = ('groups',)
 
     inlines = [
         DeviceEmployeeInline,
