@@ -89,6 +89,8 @@ LANGUAGE_CODE = 'es-MX'
 
 TIME_ZONE = 'America/Mexico_City'
 
+DATE_INPUT_FORMATS =  ['%d-%m-%Y']
+
 USE_I18N = True
 
 USE_L10N = True

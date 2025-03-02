@@ -14,24 +14,6 @@
 </div>
 {% endblock %}
 
-{% block result_list %}
-
-<h1> Generación de Reportes <h1>
-
-
-{{data}}
-
-{% block submit_buttons_bottom %}
-    {{ block.super }}
-    <div class="submit-row">
-            <input type="submit" value="Generar PDF" name="_generate-pdf">
-    </div>
-{% endblock %}
-
-{% endblock result_list %}
-
-
-
 {% load static %}
 
 <!-- Bootstrap core JavaScript -->
@@ -41,5 +23,40 @@
 <script src="{% static 'landing/js/scripts.js' %}"></script>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 <link rel="stylesheet" href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}">
+
+{% block result_list %}
+{% endblock result_list %}
+
+{% block content %}
+<h1> Generación de Reportes <h1>
+
+  <form action="." method="post">
+      {% csrf_token %}
+      <h2> Rango de fechas </h2>
+
+      <div style=" display: grid; gap: 50px 50px; grid-template-columns: 150px 150px;">
+      
+        <div>
+          <h3 for="start_date"> Fecha Inicial </h3>
+          {{ form.start_date }}
+        
+        </div>
+        
+        <div>
+          
+          <h3 for="end_date"> Fecha Final </h3>
+          {{ form.end_date }}
+
+        </div>
+
+       </div>
+      
+       <br><br>
+
+      <input type="submit" value="Generar PDF" name="generate_pdf">
+    
+       
+  </form>
+
+  {% endblock content %}
